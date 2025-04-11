@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+   
+    char nombre[10];
+    int edad;
+    char genero;
+   
+   
+    printf("Ing nombre:");
+    //Se lee el string ingresado por teclado
+    //nombre es la direccion de memoria de la primer posicion del vector ,
+    //luego el tamaño en bytes y luego stdin que es que el dato viene por teclado
+    fgets(nombre,sizeof(nombre),stdin);
+    //se busca pararse en la posicion del vector donde esta el caracter \n (salto de linea) y se reemplaza por \0 (fin de linea)
+    nombre[strcspn(nombre,"\n")] = '\0';
+   
+    printf("Ing edad:");
+    scanf("%d", &edad);
+    //se ejecuta hasta que lo dentro del while sea falso osea hasta que lee un /n inclusive en el buffer
+    while(getchar()!='\n');
+   
+    printf("Ing genero:");
+    //Se lee un caracter solo
+    genero=getchar();
+    while(getchar()!='\n');
+   
+    printf("Nombre: %s Edad: %d Genero:%c \n",nombre,edad,genero);
+   
+   
+
+    return 0;
+}
