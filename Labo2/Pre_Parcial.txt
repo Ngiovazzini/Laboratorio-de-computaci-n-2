@@ -1,0 +1,27 @@
+Elabora un programa en C para gestionar un festival. 
+
+Tu programa deberá permitir al usuario realizar las siguientes operaciones: 
+
+1. Agregar una banda: El usuario podrá ingresar los detalles de la banda, incluyendo nombre, cantante y año de creación. La banda deberá ser agregada a la lista de bandas que asistirán al festival. 
+
+2. Buscar una banda por nombre: El usuario podrá buscar una banda por su nombre. En caso de encontrar coincidencias, se deberá mostrar la banda con todos sus detalles (cantante y año de creación). 
+
+3. Buscar banda por cantante: El usuario podrá buscar bandas por cantante. En caso de encontrar coincidencias, se deberá mostrar su banda correspondiente junto con su año de creación. 
+
+4. Listar todas las bandas: El usuario podrá ver una lista de todas las bandas que asistirán, mostrando sus detalles (nombre, cantante y año de creación). 
+
+5. Eliminar una banda: El usuario podrá eliminar una banda, ingresando su nombre. 
+
+
+
+Para implementar este programa, se te pide seguir las siguientes indicaciones: 
+
+- Utilizar struct para representar la información de cada banda. 
+
+- Emplear vectores para almacenar las bandas. 
+
+- Utilizar funciones para realizar cada una de las operaciones mencionadas anteriormente. 
+
+- Implementa un menú de opciones para que el usuario pueda seleccionar la operación que desea realizar. 
+
+-Manejar los casos de errores.
