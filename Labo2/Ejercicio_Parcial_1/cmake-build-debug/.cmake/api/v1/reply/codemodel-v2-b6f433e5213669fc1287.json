@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.29"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Ejercicio_Parcial_1",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Ejercicio_Parcial_1::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Ejercicio_Parcial_1-Debug-0c543fc84be785ecdb2d.json",
+					"name" : "Ejercicio_Parcial_1",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "G:/.shortcut-targets-by-id/1-7x8oI6qs9Eezr-J69VHFy5e-bxe3tqJ/Drive/UNSAM/Labo2/Ejercicio_Parcial_1/cmake-build-debug",
+		"source" : "G:/.shortcut-targets-by-id/1-7x8oI6qs9Eezr-J69VHFy5e-bxe3tqJ/Drive/UNSAM/Labo2/Ejercicio_Parcial_1"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
