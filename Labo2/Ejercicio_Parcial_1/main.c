@@ -58,6 +58,7 @@ void modificar(struct notebook vector[],int *elementos) {
  long int modificar;
     printf("Ingrese el DNI de la persona a la cual quiere modificar la fecha de expiracion \n");
     scanf("%li",&modificar);
+    while(getchar()!='\n');
     for(int i=0;i<(*elementos);i++) {
         if(modificar==vector[i].dni) {
             char nuevo [12];
@@ -65,13 +66,13 @@ void modificar(struct notebook vector[],int *elementos) {
             fgets(nuevo,12,stdin);
             fflush(stdin);
             strcpy(vector[i].fecha_expiracion,nuevo);
-        }else{printf("ERROR: No se encuentra la persona");}
+        }
     }
 
 }
 
 int main(void) {
-    int opcion, borrar,elementos;
+    int opcion=0, borrar,elementos;
     struct notebook *vector; //puntero del tipo struct notebook
 
     printf("Cuantas notebooks desea cargar? \n");
@@ -88,7 +89,7 @@ int main(void) {
     cargar_datos(vector,&elementos);
 
 
-    do{
+    while (opcion!=5){
         printf("Elija la opcion deseada\n");
         printf("1-Imprimir Elementos\n"
                         "2-Modificar Fecha de Expiracion mediante DNI\n"
@@ -101,11 +102,13 @@ int main(void) {
 
         switch (opcion) {
             case 1: imprimir(vector,&elementos);
+                    break;
 
             case 2: modificar(vector,&elementos);
+                    break;
 
         }
-    }while (opcion!=5);
+    }
 
 
 
