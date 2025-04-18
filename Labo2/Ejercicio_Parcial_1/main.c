@@ -11,9 +11,10 @@ struct notebook{
     float valor_asegurado;
 };
 
-void cargar_datos(struct notebook vector[],int *elementos) {
+void cargar_datos(struct notebook vector[],int *elementos,int *indice) {
     printf("Cargue los datos:\n");
   for(int i=0;i<(*elementos);i++) {
+      *indice++;
       printf("Ingrese el codigo de la maquina %d \n",i+1);
       scanf("%d",&vector[i].codigo_maquina);
       while(getchar()!='\n');
@@ -38,7 +39,7 @@ void cargar_datos(struct notebook vector[],int *elementos) {
       scanf("%f",&vector[i].valor_asegurado);
       while(getchar()!='\n');
   }
-
+    *indice--;
 }
 
 void imprimir(struct notebook vector[],int *elementos) {
@@ -71,8 +72,50 @@ void modificar(struct notebook vector[],int *elementos) {
 
 }
 
+void modificar_todo(struct notebook vector[],int *indice) {
+    int new_codi=0;
+
+    printf("Ingrese el codigo de maquina asi modifica todos los datos \n");
+    scanf("%li",&new_codi);
+    while(getchar()!='\n');
+
+        if(new_codi==vector[*indice].codigo_maquina) {
+            printf("Ingrese el nuevo nombre de la persona\n");
+            fgets(vector[*indice].nombre_prestado,20,stdin);
+            fflush(stdin);
+
+            printf("El DNI nuevo \n");
+            scanf("%li",&vector[*indice].dni);
+            while(getchar()!='\n');
+
+            printf("Nuevo Fecha del prestamo\n");
+            fgets(vector[*indice].fecha_prestamo,12,stdin);
+            fflush(stdin);
+
+            printf("Nueva Fecha de expiracion\n");
+            fgets(vector[*indice].fecha_expiracion,12,stdin);
+            fflush(stdin);
+
+            printf("Nuevo Valor asegurado\n");
+            scanf("%f",&vector[*indice].valor_asegurado);
+            while(getchar()!='\n');
+        }
+
+}
+
+/*void borrar_indice(struct notebook vector[], int *elementos) {
+    int indice=0;
+    imprimir(vector,&elementos);
+
+    printf("indique el indice del usuario que desea borrar: \n");
+    scanf("%i",&indice);
+    while(getchar()!='\n');
+
+
+}*/
+
 int main(void) {
-    int opcion=0, borrar,elementos;
+    int opcion=0, borrar,elementos,indice=0;
     struct notebook *vector; //puntero del tipo struct notebook
 
     printf("Cuantas notebooks desea cargar? \n");
@@ -86,7 +129,7 @@ int main(void) {
         return -1;
     }
 
-    cargar_datos(vector,&elementos);
+    cargar_datos(vector,&elementos,&indice);
 
 
     while (opcion!=5){
@@ -107,10 +150,14 @@ int main(void) {
             case 2: modificar(vector,&elementos);
                     break;
 
+            case 3: modificar_todo(vector,&indice);
+
+            case 4: //borrar_indice(vector,&elementos);
+                    break;
         }
     }
 
-
+free(vector);
 
 
 

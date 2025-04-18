@@ -1,4 +1,4 @@
-# Install script for directory: G:/.shortcut-targets-by-id/1-7x8oI6qs9Eezr-J69VHFy5e-bxe3tqJ/Drive/UNSAM/Labo2/Ejercicio_Parcial_1
+# Install script for directory: C:/Users/Lomber/Desktop/Repositorio/Laboratorio-de-computaci-n-2/Labo2/Ejercicio_Parcial_1
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "G:/.shortcut-targets-by-id/1-7x8oI6qs9Eezr-J69VHFy5e-bxe3tqJ/Drive/UNSAM/Labo2/Ejercicio_Parcial_1/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/Lomber/Desktop/Repositorio/Laboratorio-de-computaci-n-2/Labo2/Ejercicio_Parcial_1/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

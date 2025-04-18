@@ -21,6 +21,11 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
+			"path" : "C:/Program Files/JetBrains/CLion 2024.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeMinGWFindMake.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
 			"path" : "C:/Program Files/JetBrains/CLion 2024.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeSystemSpecificInitialize.cmake"
 		},
 		{
@@ -459,8 +464,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "G:/.shortcut-targets-by-id/1-7x8oI6qs9Eezr-J69VHFy5e-bxe3tqJ/Drive/UNSAM/Labo2/Ejercicio_Parcial_1/cmake-build-debug",
-		"source" : "G:/.shortcut-targets-by-id/1-7x8oI6qs9Eezr-J69VHFy5e-bxe3tqJ/Drive/UNSAM/Labo2/Ejercicio_Parcial_1"
+		"build" : "C:/Users/Lomber/Desktop/Repositorio/Laboratorio-de-computaci-n-2/Labo2/Ejercicio_Parcial_1/cmake-build-debug",
+		"source" : "C:/Users/Lomber/Desktop/Repositorio/Laboratorio-de-computaci-n-2/Labo2/Ejercicio_Parcial_1"
 	},
 	"version" : 
 	{
