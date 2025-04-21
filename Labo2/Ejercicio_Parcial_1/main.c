@@ -103,16 +103,20 @@ void modificar_todo(struct notebook vector[],int *indice) {
 
 }
 
-/*void borrar_indice(struct notebook vector[], int *elementos) {
-    int indice=0;
-    imprimir(vector,&elementos);
+void borrar_indice(struct notebook vector[], int *elementos,int *indice) {
+    int borrar;
+    imprimir(vector,elementos);
 
     printf("indique el indice del usuario que desea borrar: \n");
-    scanf("%i",&indice);
+    scanf("%i",&borrar);
     while(getchar()!='\n');
 
+    for(int i=*indice;i<(*elementos-1);i++) {
+        vector[i]=vector[i+1];
+    }
+    *elementos-=1;
 
-}*/
+}
 
 int main(void) {
     int opcion=0, borrar,elementos,indice=0;
@@ -152,7 +156,7 @@ int main(void) {
 
             case 3: modificar_todo(vector,&indice);
 
-            case 4: //borrar_indice(vector,&elementos);
+            case 4: borrar_indice(vector,&elementos,&indice);
                     break;
         }
     }
