@@ -118,9 +118,25 @@ void borrar_indice(struct notebook vector[], int *elementos,int *indice) {
 
 }
 
+void imprimir_txt(struct notebook vector[],FILE *p_Archivo,int *elementos) {
+
+    for(int i=0;i<(*elementos);i++) {
+        fprintf(p_Archivo,"%d %10s %li %10s %10s %.2f \n",
+            vector[i].codigo_maquina,
+            vector[i].nombre_prestado,
+            vector[i].dni,
+            vector[i].fecha_expiracion,
+            vector[i].fecha_prestamo,
+            vector[i].valor_asegurado);
+    }
+}
+
 int main(void) {
     int opcion=0, borrar,elementos,indice=0;
     struct notebook *vector; //puntero del tipo struct notebook
+
+    FILE *p_Archivo=NULL;
+
 
     printf("Cuantas notebooks desea cargar? \n");
     scanf("%d",&elementos);
@@ -136,13 +152,14 @@ int main(void) {
     cargar_datos(vector,&elementos,&indice);
 
 
-    while (opcion!=5){
+    while (opcion!=6){
         printf("Elija la opcion deseada\n");
         printf("1-Imprimir Elementos\n"
                         "2-Modificar Fecha de Expiracion mediante DNI\n"
                         "3-Modificar Todo\n"
                         "4-Borrar por indice\n"
-                        "5-Salir\n"
+                        "5-Imprimir en Archivo .TXT\n"
+                        "6-Salir\n"
                         );
         scanf("%d",&opcion);
         while(getchar()!='\n');
@@ -155,14 +172,21 @@ int main(void) {
                     break;
 
             case 3: modificar_todo(vector,&indice);
-
+                    break;
             case 4: borrar_indice(vector,&elementos,&indice);
+                    break;
+
+            case 5: p_Archivo=fopen("archivo.txt","w");
+                    if(p_Archivo==NULL) {
+                        printf("no funciona el archivo");
+                    }
+                    imprimir_txt(vector,p_Archivo,&elementos);
                     break;
         }
     }
 
 free(vector);
-
+fclose(p_Archivo);
 
 
 
