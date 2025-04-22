@@ -120,13 +120,17 @@ void borrar_indice(struct notebook vector[], int *elementos,int *indice) {
 
 void imprimir_txt(struct notebook vector[],FILE *p_Archivo,int *elementos) {
 
+        //vector[i].nombre_prestado[strcspn(vector[i].nombre_prestado, "\n")] = '\0';
+        //vector[i].fecha_prestamo[strcspn(vector[i].fecha_prestamo, "\n")] = '\0';
+        //vector[i].fecha_expiracion[strcspn(vector[i].fecha_expiracion, "\n")] = '\0';
+
     for(int i=0;i<(*elementos);i++) {
         fprintf(p_Archivo,"%d %10s %li %10s %10s %.2f \n",
             vector[i].codigo_maquina,
             vector[i].nombre_prestado,
             vector[i].dni,
-            vector[i].fecha_expiracion,
             vector[i].fecha_prestamo,
+            vector[i].fecha_expiracion,
             vector[i].valor_asegurado);
     }
 }
@@ -176,17 +180,18 @@ int main(void) {
             case 4: borrar_indice(vector,&elementos,&indice);
                     break;
 
-            case 5: p_Archivo=fopen("archivo.txt","w");
+            case 5: p_Archivo=fopen("Entradas.txt","w");
                     if(p_Archivo==NULL) {
                         printf("no funciona el archivo");
                     }
                     imprimir_txt(vector,p_Archivo,&elementos);
+                    fclose(p_Archivo);
                     break;
         }
     }
 
 free(vector);
-fclose(p_Archivo);
+
 
 
 
