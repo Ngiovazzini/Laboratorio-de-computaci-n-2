@@ -120,12 +120,8 @@ void borrar_indice(struct notebook vector[], int *elementos,int *indice) {
 
 void imprimir_txt(struct notebook vector[],FILE *p_Archivo,int *elementos) {
 
-        //vector[i].nombre_prestado[strcspn(vector[i].nombre_prestado, "\n")] = '\0';
-        //vector[i].fecha_prestamo[strcspn(vector[i].fecha_prestamo, "\n")] = '\0';
-        //vector[i].fecha_expiracion[strcspn(vector[i].fecha_expiracion, "\n")] = '\0';
-
     for(int i=0;i<(*elementos);i++) {
-        fprintf(p_Archivo,"%d %10s %li %10s %10s %.2f \n",
+        fprintf(p_Archivo,"%d\n%10s\n%li\n%10s\n%10s\n%.2f\n",
             vector[i].codigo_maquina,
             vector[i].nombre_prestado,
             vector[i].dni,
