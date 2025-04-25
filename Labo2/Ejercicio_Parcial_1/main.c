@@ -21,7 +21,7 @@ void cargar_datos(struct notebook vector[],int *elementos,int *indice) {
 
       printf("Nombre de la persona a la que se le presto \n");
       fgets(vector[i].nombre_prestado,20,stdin);
-      vector[i].nombre_prestado[strcspn(vector[i].nombre_prestado,"\n")] = '\0';
+      vector[i].nombre_prestado[strcspn(vector[i].nombre_prestado,"\n")] = '\0'; //esto elimina los saltos de lienea
 
       printf("DNI \n");
       scanf("%li",&vector[i].dni);
