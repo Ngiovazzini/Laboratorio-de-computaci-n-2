@@ -143,16 +143,33 @@ void imprimir_binario(struct notebook vector[],FILE *datos_archivo,int *elemento
 
 }
 
-void cargar_binario(struct notebook vector[],FILE *datos_archivo,int *elementos){
+void cargar_binario(struct notebook vector[],FILE *datos_archivo,int *elementos,int *indice){
     datos_archivo=fopen("Datos.dat","rb");
 
     if(datos_archivo!=NULL){
 
+     /*   if(leidos!=elementos){
+            int leidos=fread(datos_archivo,sizeof(struct notebook),*elementos,datos_archivo);
+            printf("ERROR:No se leyeron los elementos");
+            fclose(datos_archivo);
+            return -1;
+        }
+    */
+        fseek(datos_archivo,0,SEEK_END); //esto coloca el cursor en la ultima posicion del "vector"
+        int num_notebooks=ftell(datos_archivo)/sizeof(struct notebook);/*ftell() te devuelve el valor en bytes del lugar donde
+        el cursor del puntero en ese momento y eso dividido el tamaño en bytes del struct notebook te da la cantidad
+        de notebook cargadas*/
+        rewind(datos_archivo);//vuelve el posicionador al inicio
 
+        vector=(struct notebook*)realloc(vector,num_notebooks*sizeof(struct notebook));
+        fread(vector,sizeof(struct notebook),num_notebooks,datos_archivo);
 
-
+        (*elementos)=num_notebooks;
+        (*indice)=num_notebooks+1;
+        printf("Inventario cargado correctamente");
     }else{printf("No se puede abrir el archivo");}
 
+    fclose(datos_archivo);
 
 }
 
@@ -178,7 +195,7 @@ int main(void) {
     desicion=getchar();
     while(getchar()!='\n');
     if(desicion=='s'){
-        cargar_binario(vector,datos_archivo,&elementos);
+        cargar_binario(vector,datos_archivo,&elementos,&indice);
     }else{cargar_datos(vector,&elementos,&indice);}
 
 
@@ -219,7 +236,7 @@ int main(void) {
                     break;
 
             case 6:imprimir_binario(vector,datos_archivo,&elementos);
-
+                    break;
 
         }
     }
