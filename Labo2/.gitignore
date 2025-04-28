@@ -1,0 +1,44 @@
+# --------------------------------------
+# Archivos de C/C++ generados
+*.exe
+*.o
+*.obj
+*.a
+*.out
+
+
+
+# Archivos de logs, temporales y backups
+*.log
+*.tmp
+*.bak
+*~
+
+# Archivos ocultos de editores
+.idea/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Archivos de CMake
+build/
+cmake-build-debug/
+CMakeFiles/
+Testing/
+
+# Archivos de CMake
+CMakeCache.txt
+Makefile
+cmake_install.cmake
+
+# Archivos temporales de Office
+~$*
+
+# Si hay algún ejecutable específico
+Ejercicio_Parcial_1/*.exe
+Ejercicio_Parcial_1/*.o
+
+# --------------------------------------
+# Fin del .gitignore

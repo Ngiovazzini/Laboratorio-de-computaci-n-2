@@ -71,7 +71,6 @@ void modificar(struct notebook vector[],int *elementos) {
     }
 
 }
-
 void modificar_todo(struct notebook vector[],int *indice) {
     int new_codi=0;
 
@@ -157,7 +156,7 @@ void cargar_binario(struct notebook vector[],FILE *datos_archivo,int *elementos,
     */
         fseek(datos_archivo,0,SEEK_END); //esto coloca el cursor en la ultima posicion del "vector"
         int num_notebooks=ftell(datos_archivo)/sizeof(struct notebook);/*ftell() te devuelve el valor en bytes del lugar donde
-        el cursor del puntero en ese momento y eso dividido el tamaño en bytes del struct notebook te da la cantidad
+        el cursor del puntero en ese momento y eso dividido el tamaï¿½o en bytes del struct notebook te da la cantidad
         de notebook cargadas*/
         rewind(datos_archivo);//vuelve el posicionador al inicio
 
