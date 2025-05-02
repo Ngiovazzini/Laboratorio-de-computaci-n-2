@@ -112,11 +112,72 @@ void cargar_datos_dat(struct articulo **vector, int *elementos_vector) {
     fclose(ptr_dat);
 }
 
+void modificar(struct articulo *vector,int *elementos_vector){
+    int codigo_viejo;
+    printf("------Ingrese el codigo del producto que desea modificar------\n");
+    scanf("%d",&codigo_viejo);
+    while (getchar() != '\n');
+
+    for(int i=0;i<*elementos_vector;i++){
+        if(codigo_viejo==vector[i].codigo_producto){
+            printf("---Ingrese los nuevos datos-----\n");
+            printf("Ingrese el nuevo nombre\n");
+
+            fgets(vector[i].nombre,50,stdin);
+            vector[i].nombre[strcspn(vector[i].nombre,"\n")] = '\0';
+
+            printf("Ingrese el nuevo precio\n");
+            scanf("%f",&vector[i].precio);
+            while(getchar()!='\n');
+
+            printf("Ingrese la nueva cantidad disponible\n");
+            scanf("%d",&vector[i].cantidad_disponible);
+            while(getchar()!='\n');
+
+            printf("Ingrese la nueva cantidad vendida\n");
+            scanf("%d",&vector[i].cantidad_vendida);
+            while(getchar()!='\n');
+        }else{printf("No se encuentra ese codigo");}
+    }
+}
+
+void solicitar_venta(struct articulo *vector,int *elementos_vector){
+        int codigo,cantidad;
+        printf("----Igrese el codigo del producto que desea verificar----\n");
+        scanf("%d",&codigo);
+        while(getchar()!='\n');
+
+        for(int i=0;i<*elementos_vector;i++){
+            if(codigo==vector[i].codigo_producto){
+                printf("Ingrese la cantidad que desea vender\n");
+                scanf("%d",&cantidad);
+                while(getchar()!='\n');
+
+                if(vector[i].cantidad_disponible>cantidad && vector[i].cantidad_disponible>vector[i].cantidad_vendida){
+                    printf("Hay stock de este producto");
+                    vector[i].cantidad_disponible-= cantidad;
+                    vector[i].cantidad_vendida+=cantidad;
+
+                }else{printf("No hay stock");
+                      i=(*elementos_vector);}
+        }
+        }
+}
+
+float total_recaudado(struct articulo *vector,int *elementos_vector){
+    float total=0;
+    for(int i=0;i<*elementos_vector;i++){
+        total+=vector[i].precio*vector[i].cantidad_vendida;
+    }
+    return total;
+}
+
 int main(void) {
     struct articulo *vector = malloc(sizeof(struct articulo));
     int elementos_vector = 0;
-    char decision;
+    char desicion;
     int opcion = 0;
+
 
     if (!vector) {
         printf("NO SE PUDO RESERVAR MEMORIA\n");
@@ -124,10 +185,10 @@ int main(void) {
     }
 
     printf("Desea cargar los datos desde un archivo .dat? S/N: ");
-    scanf("%c", &decision);
+    scanf("%c", &desicion);
     while (getchar() != '\n');
 
-    if (decision == 's' || decision == 'S') {
+    if (desicion == 's' || desicion == 'S') {
         cargar_datos_dat(&vector, &elementos_vector);
     } else {
         cargar_datos(&vector, &elementos_vector);
@@ -153,11 +214,11 @@ int main(void) {
             case 1:
                 imprimir(vector, elementos_vector);
                 break;
-            case 2:
+            case 2: modificar(vector,&elementos_vector);
                     break;
-            case 3:
+            case 3: solicitar_venta(vector,&elementos_vector);
                     break;
-            case 4:
+            case 4: printf("El total recaudado es: %f",total_recaudado(vector,&elementos_vector));
                     break;
             case 5:
                     break;
