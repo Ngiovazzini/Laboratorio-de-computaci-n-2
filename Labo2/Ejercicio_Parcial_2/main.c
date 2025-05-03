@@ -10,8 +10,8 @@ struct articulo {
     int cantidad_vendida;
 };
 
-void imprimir(struct articulo vector[], int elementos_vector) {
-    for (int i = 0; i < elementos_vector; i++) {
+void imprimir(struct articulo vector[], int *elementos_vector) {
+    for (int i = 0; i < *elementos_vector; i++) {
         printf("---- INDICE %d ----\n", i + 1);
         printf("Codigo producto: %d\n", vector[i].codigo_producto);
         printf("Nombre: %s\n", vector[i].nombre);
@@ -79,7 +79,7 @@ void cargar_datos(struct articulo **vector, int *elementos_vector) {
     } while (opcion != 'n' && opcion != 'N');
 }
 
-void imprimir_datos_dat(struct articulo *vector, int elementos_vector) {
+void imprimir_datos_dat(struct articulo *vector, int *elementos_vector) {
     FILE *ptr_dat = fopen("Datos_bin.dat", "wb");
     if (!ptr_dat) {
         printf("ERROR al abrir archivo binario para escritura.\n");
@@ -171,6 +171,26 @@ float total_recaudado(struct articulo *vector,int *elementos_vector){
     }
     return total;
 }
+void borrar(struct articulo **vector,int *elementos_vector){
+    int elemento=0;
+
+    //imprimir(vector,&elementos_vector);
+
+    printf("Indique el indice del producto que desea borrar\n");
+    scanf("%d",&elemento);
+    while (getchar() != '\n');
+
+    for(int i=elemento-1;i<(*elementos_vector);i++){
+        printf("elementos %d \n",*elementos_vector);
+        printf("Moviendo de %d a %d \n",i+1, i);
+        getchar();
+        (*vector)[i]=(*vector)[i+1];
+    }
+    (*elementos_vector)--;
+
+    *vector=(struct articulo *)realloc(*vector,(*elementos_vector)*sizeof(struct articulo));
+
+}
 
 int main(void) {
     struct articulo *vector = malloc(sizeof(struct articulo));
@@ -212,7 +232,7 @@ int main(void) {
 
         switch (opcion) {
             case 1:
-                imprimir(vector, elementos_vector);
+                imprimir(vector, &elementos_vector);
                 break;
             case 2: modificar(vector,&elementos_vector);
                     break;
@@ -220,7 +240,7 @@ int main(void) {
                     break;
             case 4: printf("El total recaudado es: %f",total_recaudado(vector,&elementos_vector));
                     break;
-            case 5:
+            case 5: borrar(&vector,&elementos_vector);
                     break;
             case 6:
                 txt(vector, elementos_vector);
