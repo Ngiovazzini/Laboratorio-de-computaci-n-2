@@ -103,6 +103,113 @@ void cargar_dat(struct cohete **vector,int *elementos_vec){
 fclose(archivo_dat);
 }
 
+void modificar(struct cohete vector[],int *elementos_vec){
+
+    char nombre_cambio[50];
+    printf("Ingrese el nombre del cohete para modificar datos: \n");
+    fgets(nombre_cambio,50,stdin);
+    nombre_cambio[strcspn(nombre_cambio, "\n")] = '\0';
+
+    for(int i=0;i<*elementos_vec;i++){
+        if(strcmp(nombre_cambio,vector[i].nombre)==0){
+            printf("Ingrese el nuevo ID:\n");
+            scanf("%d",&vector[i].id_cohete);
+            while (getchar() != '\n');
+
+            printf("Ingrese la capacidad de carga:\n");
+            scanf("%f",&vector[i].capacidad_carga);
+            while (getchar() != '\n');
+
+            printf("Ingrese numero de lanzamientos: \n");
+            scanf("%d",&vector[i].numero_lanzamientos);
+            while (getchar() != '\n');
+
+            printf("Ingrese misiones completadas: \n");
+            scanf("%d",&vector[i].misiones_completadas);
+            while (getchar() != '\n');
+
+        }//else{printf("ERROR no existe el nombre");}
+
+    }
+
+}
+
+void lanzamiento(struct cohete vector[],int *elementos_vec){
+int id_lanzamiento;
+float peso;
+    printf("Ingrese el ID para habilitar lanzamiento:\n");
+    scanf("%d",&id_lanzamiento);
+    while (getchar() != '\n');
+
+    printf("Ingrese el peso a llevar:\n");
+    scanf("%f",&peso);
+    while (getchar() != '\n');
+
+    for(int i=0;i<*elementos_vec;i++){
+        if(vector[i].id_cohete==id_lanzamiento){
+            if(peso<=vector[i].capacidad_carga){
+                printf("Despegue habilitado\n");
+                (vector[i].numero_lanzamientos)++;
+                (vector[i].misiones_completadas)++;
+            }else{printf("No se puede habilitar despegue\n");}
+
+        }
+    }
+
+
+
+
+}
+
+int total(struct cohete vector[],int *elementos_vec){
+int total=0;
+    for(int i=0;i<*elementos_vec;i++){
+        total+=vector[i].misiones_completadas;
+    }
+return total;
+}
+
+void eliminar(struct cohete **vector,int *elementos_vec){
+int eleccion;
+
+    //imprimir(vector,&elementos_vec);
+
+    printf("Elija mediante posicion que cohete desea eliminar:\n");
+    scanf("%d",&eleccion);
+    while (getchar() != '\n');
+
+                for(int i=eleccion;i<*elementos_vec;i++){
+                        (*vector)[i]=(*vector)[i+1];
+
+                        printf("Moviendo de %d a %d \n",i+1, i);
+                        getchar();
+                    }
+
+            (*elementos_vec)--;
+
+            (*vector)=(struct cohete *)realloc((*vector),*elementos_vec);
+
+            if((*vector)==NULL){printf("ERROR");}
+}
+
+void txt(struct cohete vector[],int *elementos_vec){
+FILE *archivo_txt;
+
+    archivo_txt=fopen("reporte.txt","w");
+    if(archivo_txt!=NULL){
+
+        for(int i=0;i<*elementos_vec;i++){
+            fprintf(archivo_txt,"%d\n %s\n %f\n %d\n %d\n",
+                    vector[i].id_cohete,
+                    vector[i].nombre,
+                    vector[i].capacidad_carga,
+                    vector[i].numero_lanzamientos,
+                    vector[i].misiones_completadas);
+        }
+    }
+    fclose(archivo_txt);
+}
+
 int main(void){
 
     struct cohete *vector;
@@ -142,26 +249,26 @@ int main(void){
             case 1: imprimir(vector,&elementos_vec);
                     break;
 
-            case 2:
+            case 2: modificar(vector,&elementos_vec);
                     break;
 
-            case 3:
+            case 3: lanzamiento(vector,&elementos_vec);
                     break;
 
-            case 4:
+            case 4: printf("El total de misiones completadas es de: %i \n",total(vector,&elementos_vec));
                     break;
 
-            case 5:
+            case 5: eliminar(&vector,&elementos_vec);
                     break;
 
-            case 6:
+            case 6: txt(vector,&elementos_vec);
                     break;
 
             case 7: exportar_dat(&vector,&elementos_vec);
                     break;
 
 
-            case 8:
+            case 8: cargar_dat(&vector,&elementos_vec);
                     break;
 
 
@@ -173,7 +280,7 @@ int main(void){
     }while(opcion!=9);
 
 
-
+free(vector);
 
 return 0;
 }
