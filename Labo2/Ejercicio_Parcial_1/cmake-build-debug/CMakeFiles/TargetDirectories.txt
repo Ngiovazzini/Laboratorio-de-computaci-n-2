@@ -1,3 +1,0 @@
-C:/Users/Lomber/Desktop/Repositorio/Laboratorio-de-computaci-n-2/Labo2/Ejercicio_Parcial_1/cmake-build-debug/CMakeFiles/Ejercicio_Parcial_1.dir
-C:/Users/Lomber/Desktop/Repositorio/Laboratorio-de-computaci-n-2/Labo2/Ejercicio_Parcial_1/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Lomber/Desktop/Repositorio/Laboratorio-de-computaci-n-2/Labo2/Ejercicio_Parcial_1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
