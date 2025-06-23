@@ -61,7 +61,8 @@ public:
         ataque+=5;
         defensa+=5;
         salud+=8;
-        std::cout <<"Felicidades subiste de nivel"<<"\n";
+        std::cout <<"Felicidades subiste de nivel ---------"<<nombre<<"--------\n";
+
         imrpimir_datos();
     }
 
@@ -77,9 +78,9 @@ public:
 
             int opcion;
             std::cout <<"Elija la opcion deseada"<< std::endl;
-            std::cout <<"1-Desea atacar usando un objeto?"<< std::endl;
-            std::cout <<"2-Desea aumentar su defensa con un objeto?"<< std::endl;
-            std::cout <<"3-Desea atacar sin ningun objeto?"<< std::endl;
+            std::cout <<"1-Atacar usando un objeto"<< std::endl;
+            std::cout <<"2-Aumentar su defensa con un objeto"<< std::endl;
+            std::cout <<"3-Atacar"<< std::endl;
             std::cin >> opcion;
             switch (opcion) {
                 case 1:
@@ -99,10 +100,11 @@ public:
                 case 3: heroe.atacar(enemigo);
                     break;
             }
+            std::cout<<"----------------------------\n";
             enemigo.imrpimir_datos();
-            std::cout<<"\n";
+            std::cout<<"---------------------------\n";
             heroe.imrpimir_datos();
-
+            std::cout<<"---------------------------\n";
 
     }
 
