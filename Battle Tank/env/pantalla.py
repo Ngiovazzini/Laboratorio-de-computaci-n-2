@@ -1,7 +1,9 @@
 import pygame
-from dibujar import matriz
+from clases import *
+from dibujar import matriz,matriz_mapa
 
 pygame.init()
+#_______VARIABLES_________________
 width=800
 height=600
 screen = pygame.display.set_mode((width, height))
@@ -13,7 +15,17 @@ columnas = height//32
 tile_size=32
 ancho_tiles = width // tile_size
 alto_tiles = height // tile_size
+pos_tank_x=15
+pos_tank_y=15
+#___________________________________________
 
+#__________Objetos______________
+player_tank=Tank(pos_tank_x,pos_tank_y,'sprits/Derecha.png',tile_size)
+player_tank_group=pygame.sprite.Group()
+player_tank_group.add(player_tank)
+#_______________________________________________________
+
+#________Funciones__________________
 def cuadricula():
     for i in range(0,width):
         pygame.draw.line(screen, (255,255,255), (0,i*tile_size),(width,i*tile_size))
@@ -28,15 +40,12 @@ def dibujar_escenario(matriz):
         for j in range(len(matriz[i])):
             pos_x = j * tile_size
             pos_y = i * tile_size
-            if (matriz[i][j] == 1):
+            if (matriz[i][j] == 0):
                 screen.blit(red_brick, (pos_x, pos_y))
-            elif (matriz[i][j] == 2):
-                screen.blit(tank_izq, (pos_x, pos_y))
-            elif (matriz[i][j] == 3):
-                screen.blit(tank_der, (pos_x, pos_y))
 
+#___________________________________________________
 
-#carga de imagenes en variables
+#______carga de imagenes en variables_______
 try:
     tank_der=pygame.image.load("sprits/Derecha.png").convert_alpha()
     tank_der = pygame.transform.scale(tank_der, (tile_size, tile_size))
@@ -60,17 +69,21 @@ print("Columnas:",columnas)
 print("Tile Size:",tile_size)
 print("Ancho Tiles:",ancho_tiles)
 print("Alto Tiles:",alto_tiles)
+#_______________________________________
 
+#_________BUCLE___________________
 while run:
+    #_____Corta el bucle si apretas la x roja_____
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run=False
 
-    screen.fill((0,0,0))
-    cuadricula()
+    screen.fill((0,0,0))#Volves a llenar de negro el fondo en cada frame
+    cuadricula()#cuadricula para guiarnos en la pantalla
 
-    dibujar_escenario(matriz)
-    pygame.display.update()
-    clock.tick(60)
+    dibujar_escenario(matriz_mapa)#EL escenario
+    player_tank_group.draw(screen)#Eltanque player
+    pygame.display.update()#se dibuja
+    clock.tick(60)#fps
 
 pygame.quit()
