@@ -32,6 +32,20 @@ def cuadricula():
         #Empieza em x=0 y va iterando en i*32(baja de 32 en 32) termina en (x=800(ancho),y=linea*32)
         pygame.draw.line(screen, (255, 255, 255), (i*tile_size,0), (i * tile_size, height))
         #Empieza en (x=i*32) y termina en (x=i*32,600(altura)
+def move(pos_tank_x,pos_tank_y):
+    if event.type==pygame.KEYDOWN:
+        if event.key==pygame.K_a:
+            pos_tank_x-=1
+            print("A")
+        if event.key==pygame.K_d:
+            pos_tank_x+=1
+            print("D")
+        if event.key==pygame.K_w:
+            pos_tank_y+=1
+            print("W")
+        if event.key==pygame.K_s:
+            pos_tank_y-=1
+            print("S")
 
 def dibujar_escenario(matriz):
     # i = filas
@@ -64,11 +78,14 @@ except(FileNotFoundError):
     print("Fallo la carga")
 except(pygame.error):
     print("Error Pygame")
+
+'''   
 print("Filas:",filas)
 print("Columnas:",columnas)
 print("Tile Size:",tile_size)
 print("Ancho Tiles:",ancho_tiles)
 print("Alto Tiles:",alto_tiles)
+'''
 #_______________________________________
 
 #_________BUCLE___________________
@@ -77,12 +94,16 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run=False
-
+        move(pos_tank_x,pos_tank_y)
+        '''
+        Como pygame registra todos los eventos en una cola de eventos ponemos todo lo que representa 
+        un evento en un bucle for para que itere dentro de esa cola de eventos
+        '''
     screen.fill((0,0,0))#Volves a llenar de negro el fondo en cada frame
-    cuadricula()#cuadricula para guiarnos en la pantalla
-
+    #cuadricula()#cuadricula para guiarnos en la pantalla
     dibujar_escenario(matriz_mapa)#EL escenario
     player_tank_group.draw(screen)#Eltanque player
+
     pygame.display.update()#se dibuja
     clock.tick(60)#fps
 
