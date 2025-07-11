@@ -17,12 +17,15 @@ ancho_tiles = width // tile_size
 alto_tiles = height // tile_size
 pos_tank_x=15
 pos_tank_y=0
+
 #___________________________________________
 
 #__________Objetos______________
+
 player_tank=Tank(pos_tank_x,pos_tank_y,'sprits/Derecha.png',tile_size)
 player_tank_group=pygame.sprite.Group()
 player_tank_group.add(player_tank)
+obstaculos=pygame.sprite.Group()
 #_______________________________________________________
 
 #________Funciones__________________
@@ -35,6 +38,7 @@ def cuadricula():
 
 
 def dibujar_escenario(matriz):
+
     # i = filas
     for i in range(len(matriz)):
         # j=columnas
@@ -42,8 +46,8 @@ def dibujar_escenario(matriz):
             pos_x = j * tile_size
             pos_y = i * tile_size
             if (matriz[i][j] == 0):
-                screen.blit(red_brick, (pos_x, pos_y))
-
+              ladrillo=Brick(pos_x,pos_y,"sprits/Ladrillo_Rojo.png",tile_size)
+              obstaculos.add(ladrillo)
 #___________________________________________________
 
 #______carga de imagenes en variables_______
@@ -66,7 +70,6 @@ except(FileNotFoundError):
 except(pygame.error):
     print("Error Pygame")
 
-
 #_______________________________________
 
 #_________BUCLE___________________
@@ -83,6 +86,7 @@ while run:
     screen.fill((0,0,0))#Volves a llenar de negro el fondo en cada frame
     #cuadricula()#cuadricula para guiarnos en la pantalla
     dibujar_escenario(matriz_mapa)#EL escenario
+    obstaculos.draw(screen)#Los ladrillos
     player_tank_group.draw(screen)#Eltanque player
     player_tank.update()
     pygame.display.update()#se dibuja
