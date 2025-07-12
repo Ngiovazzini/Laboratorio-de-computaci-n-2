@@ -3,7 +3,6 @@ import pygame as py
 
 
 
-
 class Brick(py.sprite.Sprite):
     def __init__(self, x,y,ruta,tile_size):
         super().__init__()
@@ -67,5 +66,32 @@ class Tank(py.sprite.Sprite):
 
 
 
+class TankEnemy(Tank):
+    def __init__(self, x, y,imagenes):
+        super().__init__( x, y,imagenes)
 
+    def update(self,obstaculos,player_tank_group):
+        self.rect.y -= 1
+        if pygame.sprite.spritecollide(self, obstaculos, False) or pygame.sprite.spritecollide(self, player_tank_group, False):
+            self.rect.x -= 1
+            self.rect.y += 1
+        if pygame.sprite.spritecollide(self, obstaculos, False):
+            self.rect.x += 1
+            self.rect.y -= 1
+
+
+
+
+
+        if self.rect.left < 0:
+            self.rect.left=800
+        if self.rect.left > 800:
+            self.rect.left = 0
+        if self.rect.top < 0:
+            self.rect.top=600
+        if self.rect.top > 600:
+            self.rect.top = 0
+        #if pygame.sprite.spritecollide(self, obstaculos, False):
+            #self.rect.y -= self.velocidad
+            #self.rect.x -= self.velocidad
 

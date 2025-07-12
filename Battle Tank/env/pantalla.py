@@ -1,5 +1,5 @@
 import pygame
-from clases import Tank,Brick
+from clases import Tank,Brick,TankEnemy
 from mapa import matriz_mapa
 
 pygame.init()
@@ -43,8 +43,10 @@ imagenes = [tank_der, tank_izq, tank_inf, tank_sup]
 
 player_tank=Tank(pos_tank_x,pos_tank_y,imagenes)
 player_tank_group=pygame.sprite.Group()
-player_tank_group.add(player_tank)
 obstaculos=pygame.sprite.Group()
+#for i in range(0,6):
+enemigo=TankEnemy(700,500,imagenes)
+player_tank_group.add(player_tank,enemigo)
 #_______________________________________________________
 
 #________Funciones__________________
@@ -89,6 +91,7 @@ while run:
     obstaculos.draw(screen)#Los ladrillos
     player_tank_group.draw(screen)#Eltanque player
     player_tank.update(obstaculos)
+    enemigo.update(obstaculos,player_tank_group)
     pygame.display.update()#se dibuja
     clock.tick(60)#fps
 
