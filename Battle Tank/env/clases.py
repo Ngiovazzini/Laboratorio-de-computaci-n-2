@@ -1,7 +1,8 @@
 import pygame
 import pygame as py
 
-from sympy import false
+
+
 
 class Brick(py.sprite.Sprite):
     def __init__(self, x,y,ruta,tile_size):
@@ -15,24 +16,46 @@ class Brick(py.sprite.Sprite):
         pass
 
 class Tank(py.sprite.Sprite):
-    def __init__(self, x, y,ruta,tile_size):
+    def __init__(self, x, y,imagenes):
         super().__init__()
 
-        image_s_escalar = pygame.image.load(ruta).convert()
-        self.image = py.transform.scale(image_s_escalar,(tile_size,tile_size) )
+        self.img_der = imagenes[0]
+        self.img_izq = imagenes[1]
+        self.img_abajo = imagenes[2]
+        self.img_arriba = imagenes[3]
+        self.image = self.img_der
+        self.image =imagenes[0]
         self.rect = self.image.get_rect()#requerido para que Group() sepa como dibujarlos
         self.rect.topleft = (x, y)
-
-    def update(self):
+        self.velocidad=2
+    def update(self,obstaculos):
+        dy = 0
+        dx = 0
         teclas=py.key.get_pressed() #esto devuelve un true si una tecla es presionada
         if teclas[py.K_UP]:
-            self.rect.move_ip(0,-3)
+            dy+=self.velocidad
+            self.image = self.img_arriba
+
         if teclas[py.K_DOWN]:
-            self.rect.move_ip(0,3)
+            dy-=self.velocidad
+            self.image = self.img_abajo
+
         if teclas[py.K_LEFT]:
-            self.rect.move_ip(-3,0)
+            dx+=self.velocidad
+            self.image = self.img_izq
+
         if teclas[py.K_RIGHT]:
-            self.rect.move_ip(3,0)
+            dx-=self.velocidad
+            self.image =self.img_der
+
+        self.rect.x -= dx
+        self.rect.y -= dy
+
+        if pygame.sprite.spritecollide(self, obstaculos, False):
+            self.rect.y+=dy
+            self.rect.x+=dx
+
+
         if self.rect.left < 0:
             self.rect.left=800
         if self.rect.left > 800:
@@ -41,7 +64,6 @@ class Tank(py.sprite.Sprite):
             self.rect.top=600
         if self.rect.top > 600:
             self.rect.top = 0
-
 
 
 

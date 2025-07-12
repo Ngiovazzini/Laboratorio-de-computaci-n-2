@@ -1,6 +1,6 @@
 import pygame
-from clases import *
-from dibujar import matriz,matriz_mapa
+from clases import Tank,Brick
+from mapa import matriz_mapa
 
 pygame.init()
 #_______VARIABLES_________________
@@ -19,10 +19,29 @@ pos_tank_x=15
 pos_tank_y=0
 
 #___________________________________________
+# ______carga de imagenes en variables_______
+try:
+    tank_der = pygame.image.load("sprits/Derecha.png").convert_alpha()
+    tank_der = pygame.transform.scale(tank_der, (tile_size-2, tile_size-2))
+    tank_izq = pygame.image.load("sprits/Izquierda.png").convert_alpha()
+    tank_izq = pygame.transform.scale(tank_izq, (tile_size-2, tile_size-2))
+    tank_inf = pygame.image.load("sprits/Abajo.png").convert_alpha()
+    tank_inf = pygame.transform.scale(tank_inf, (tile_size-2, tile_size-2))
+    tank_sup = pygame.image.load("sprits/Arriba.png").convert_alpha()
+    tank_sup = pygame.transform.scale(tank_sup, (tile_size-2, tile_size-2))
+    red_brick = pygame.image.load("sprits/Ladrillo_Rojo.png").convert_alpha()
+    red_brick = pygame.transform.scale(red_brick, (tile_size-2, tile_size-2))
 
+    # Reescala la imagen al tamaño deseado(title_size=64)
+except(FileNotFoundError):
+    print("Fallo la carga")
+except(pygame.error):
+    print("Error Pygame")
+imagenes = [tank_der, tank_izq, tank_inf, tank_sup]
+# _______________________________________
 #__________Objetos______________
 
-player_tank=Tank(pos_tank_x,pos_tank_y,'sprits/Derecha.png',tile_size)
+player_tank=Tank(pos_tank_x,pos_tank_y,imagenes)
 player_tank_group=pygame.sprite.Group()
 player_tank_group.add(player_tank)
 obstaculos=pygame.sprite.Group()
@@ -50,28 +69,8 @@ def dibujar_escenario(matriz):
               obstaculos.add(ladrillo)
 #___________________________________________________
 
-#______carga de imagenes en variables_______
-try:
-    tank_der=pygame.image.load("sprits/Derecha.png").convert_alpha()
-    tank_der = pygame.transform.scale(tank_der, (tile_size, tile_size))
-    tank_izq=pygame.image.load("sprits/Izquierda.png").convert_alpha()
-    tank_izq=pygame.transform.scale(tank_izq, (tile_size, tile_size))
-    tank_inf=pygame.image.load("sprits/Abajo.png").convert_alpha()
-    tank_inf=pygame.transform.scale(tank_inf, (tile_size, tile_size))
-    tank_sup=pygame.image.load("sprits/Arriba.png").convert_alpha()
-    #ank_sup=pygame.transform.scale(tank_sup, (tile_size, tile_size))
-    red_brick=pygame.image.load("sprits/Ladrillo_Rojo.png").convert_alpha()
-    red_brick=pygame.transform.scale(red_brick, (tile_size, tile_size))
-    white_brick = pygame.image.load("sprits/Ladrillo_Blanco.png").convert_alpha()
-    white_brick = pygame.transform.scale(white_brick, (tile_size, tile_size))
-                                                        #Reescala la imagen al tamaño deseado(title_size=64)
-except(FileNotFoundError):
-    print("Fallo la carga")
-except(pygame.error):
-    print("Error Pygame")
 
-#_______________________________________
-
+dibujar_escenario(matriz_mapa)#EL escenario
 #_________BUCLE___________________
 while run:
     #_____Corta el bucle si apretas la x roja_____
@@ -85,10 +84,11 @@ while run:
 
     screen.fill((0,0,0))#Volves a llenar de negro el fondo en cada frame
     #cuadricula()#cuadricula para guiarnos en la pantalla
-    dibujar_escenario(matriz_mapa)#EL escenario
+
+
     obstaculos.draw(screen)#Los ladrillos
     player_tank_group.draw(screen)#Eltanque player
-    player_tank.update()
+    player_tank.update(obstaculos)
     pygame.display.update()#se dibuja
     clock.tick(60)#fps
 
