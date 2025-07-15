@@ -1,5 +1,7 @@
 import pygame
 import pygame as py
+import random
+
 
 
 class Ship(py.sprite.Sprite):
@@ -26,16 +28,7 @@ class Ship(py.sprite.Sprite):
 
     def update(self):
         self.move()
-'''
-class Obstaculo(py.sprite.Sprite,imagenes):
-    def __init__(self,pos):
-        super().__init__()
-        
-        self.image = imagenes
-        self.rect = self.image.get_rect(midbottom=pos)
-    def update(self):
-        pass
-'''
+
 class Health(py.sprite.Sprite):
     def __init__(self,pos,imagenes_estado):
         super().__init__()
@@ -46,3 +39,18 @@ class Health(py.sprite.Sprite):
 
     def update(self):
         pass
+
+
+
+
+class ShipEnemy(Ship):
+    def __init__(self,pos,imagenes_estado,vida,estado):
+        super().__init__(pos,imagenes_estado,vida=None)
+        self.estado=estado
+        self.image = imagenes_estado[self.estado]
+
+
+
+    def update(self):
+        pass
+
