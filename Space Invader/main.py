@@ -1,5 +1,6 @@
 import pygame
 import pygame as py
+import random
 from clases import *
 #-----Setup-------
 py.init()
@@ -9,6 +10,9 @@ screen = py.display.set_mode((width, height))
 clock = py.time.Clock()
 run = True
 tiled_size=32
+lista_enemigos=[]
+lista_invaders=["Invaders1","Invaders2","Invaders3","Invaders4"]
+
 #------Imagenes-----
 try:
     background = py.image.load("Sprites/Space-Background.jpg")
@@ -30,6 +34,13 @@ except FileNotFoundError:
     print("NO SE ENCONTRO EL ARCHIVO")
 except pygame.error:
     print("ERROR PYGAME")
+#------Funciones------
+def crear_enemigos(lista_enemigos,lista_invaders):
+    for i in range(0,20):
+        for j in range(0,6):
+            ran=random.choice(lista_invaders)
+            enemigo = ShipEnemy((i*42 ,j*42), imagenes, vida, ran)
+            lista_enemigos.append(enemigo)
 
 #-------Diccionario imagenes----
 imagenes={
@@ -47,9 +58,10 @@ imagenes={
     "Invaders3":invaders3,
     "Invaders4":invaders4
 }
+
 #------Objetos-------
 
-vida=Health((50,50),imagenes)
+vida=Health((50,500),imagenes)
 vida_group = pygame.sprite.Group()
 vida_group.add(vida)
 
@@ -57,10 +69,10 @@ nave=Ship((width/2,height),imagenes,vida)
 nave_group = pygame.sprite.Group()
 nave_group.add(nave)
 
-enemigo=ShipEnemy((100,100),imagenes,vida,"Invaders1")
-
+#enemigo=ShipEnemy((100,100),imagenes,vida,"Invaders1")
+crear_enemigos(lista_enemigos,lista_invaders)
 enemigo_group=pygame.sprite.Group()
-enemigo_group.add(enemigo)
+enemigo_group.add(lista_enemigos)
 #--------Bucle---------
 while run:
     for event in py.event.get():
@@ -72,9 +84,9 @@ while run:
     screen.blit(planet, (300, 100))
 
     nave_group.draw(screen)
-    vida_group.draw(screen)
     nave_group.update()
     enemigo_group.draw(screen)
+    vida_group.draw(screen)
     py.display.flip()
     clock.tick(60)
 py.quit()

@@ -2,7 +2,13 @@ import pygame
 import pygame as py
 import random
 
-
+matriz = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # Fila 0
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # Fila 1
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # Fila 2
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # Fila 3
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]   # Fila 4
+]
 
 class Ship(py.sprite.Sprite):
     def __init__(self,pos,imagenes_estado,vida):
